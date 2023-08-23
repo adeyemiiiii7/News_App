@@ -62,22 +62,23 @@ class Article {
       this.category,
       this.language});
 
-  Article.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    link = json['link'];
-    keywords = json['keywords'].cast<String>();
-    creator = json['creator'].cast<String>();
-    videoUrl = json['video_url'];
-    description = json['description'];
-    content = json['content'];
-    pubDate = json['pubDate'];
-    imageUrl = json['image_url'];
-    sourceId = json['source_id'];
-    sourcePriority = json['source_priority'];
-    country = json['country'].cast<String>();
-    category = json['category'].cast<String>();
-    language = json['language'];
-  }
+ Article.fromJson(Map<String, dynamic> json) {
+  title = json['title'];
+  link = json['link'];
+  keywords = json['keywords'] != null ? List<String>.from(json['keywords']) : null;
+  creator = json['creator'] != null ? List<String>.from(json['creator']) : null;
+  videoUrl = json['video_url'];
+  description = json['description'];
+  content = json['content'];
+  pubDate = json['pubDate'];
+  imageUrl = json['image_url'];
+  sourceId = json['source_id'];
+  sourcePriority = json['source_priority'];
+  country = json['country'] != null ? List<String>.from(json['country']) : null;
+  category = json['category'] != null ? List<String>.from(json['category']) : null;
+  language = json['language'];
+}
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
