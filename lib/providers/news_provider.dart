@@ -28,7 +28,6 @@ class NewsNotifier extends StateNotifier<NewsState> {
     // Initialize the state and load news when the notifier is created.
     loadNews();
   }
-
   // An asynchronous method to load news from a service.
   loadNews() async {
     // Update the state to indicate that loading is in progress.
@@ -36,6 +35,16 @@ class NewsNotifier extends StateNotifier<NewsState> {
     
     // Fetch news data using the NewsService class.
     final newsResponse = await NewsService().fetchNews();
+    final news = NewsModel.fromJson(newsResponse);
+    
+    // Update the state with the fetched news data and set loading to false.
+    state = state.copyWith(newsModel: news, isLoading: false);
+  }
+  loadSearchNews(String title)async{
+       state = state.copyWith(isLoading: true);
+    
+    // Fetch news data using the NewsService class.
+    final newsResponse = await NewsService().fetchNewsBySearch(title);
     final news = NewsModel.fromJson(newsResponse);
     
     // Update the state with the fetched news data and set loading to false.

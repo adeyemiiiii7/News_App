@@ -22,7 +22,7 @@ class NewsCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
                   imageUrl: article.imageUrl == null ? 
-                  ApiUrls.baseUrl : article.imageUrl.toString(),
+                  ApiUrls.imageNotFound : article.imageUrl.toString(),
                   errorWidget: (context, string, _) {
                     return const Icon(Icons.error);
                   },

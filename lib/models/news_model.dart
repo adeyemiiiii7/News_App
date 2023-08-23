@@ -46,7 +46,7 @@ class Article {
   List<String>? category;
   String? language;
 
-Article(
+  Article(
       {this.title,
       this.link,
       this.keywords,
