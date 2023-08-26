@@ -1,20 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/constants/constants.dart';
 import 'package:news_app/models/news_model.dart';
+import 'package:news_app/providers/theme_provider.dart';
 
-class NewsCard extends StatelessWidget {
+class NewsCard extends ConsumerWidget {
   const NewsCard({super.key, required this.article});
   final Article article;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+   final appThemeState = ref.watch(appThemeStateNotifier);
     return Container(
       padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
           height: 130,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.white
+        color: appThemeState.isDarkModeEnable ? Colors.grey[800] : Colors.white,
+             // Adjust colors for dark and light themes
           ),
           child: Row(
             children: [
@@ -38,9 +43,10 @@ class NewsCard extends StatelessWidget {
                   flex: 1,
                   child: Text(
                     article.title.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold
+                    style:  GoogleFonts.poppins(
+                  color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+                     // fontWeight: FontWeight.bold
+  
                     ),
                   ),
                 )
