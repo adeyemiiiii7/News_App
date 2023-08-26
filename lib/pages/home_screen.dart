@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/pages/search_screen.dart';
 import 'package:news_app/providers/news_provider.dart';
 import 'package:news_app/providers/theme_provider.dart';
@@ -18,14 +19,29 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: const Text("Breaking News for Today"),
+        backgroundColor:  appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white12,
+        title:  Text("Breaking News for Today",
+        style: GoogleFonts.poppins(
+          color: Colors.black
+        )
+        ,),
         centerTitle: true,
+        actions: [
+      IconButton(
+        icon: Icon(appThemeState.isDarkModeEnable ? Icons.lightbulb : Icons.lightbulb_outline),
+        onPressed: () {
+          if (appThemeState.isDarkModeEnable) {
+            ref.read(appThemeStateNotifier.notifier).setLightTheme();
+          } else {
+            ref.read(appThemeStateNotifier.notifier).setDarkTheme();
+          }
+        },
       ),
+      ]),
       body: SafeArea(
         child: Column(
           children: [
-            const SearchField(),
+          //  const SearchField(),
             isLoading
                 ? const Center(
                     child: CircularProgressIndicator(),
@@ -42,21 +58,24 @@ class HomeScreen extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+      backgroundColor:appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
         onTap: (int index) {
           if (index == 1) {
-            Navigator.of(context).pushReplacement(
+            Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => SearchScreen()), // Replace with your search screen
             );
           }
         },
-        items: const [
+        items:   [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: const Icon(Icons.home),
             label: 'Home',
+           backgroundColor:appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+           BottomNavigationBarItem(
+            icon: const Icon(Icons.search),
             label: 'Search',
+          backgroundColor:appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
           ),
         ],
       ),
