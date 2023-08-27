@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/app_theme.dart';
-import 'package:news_app/pages/home_screen.dart';
-import 'package:news_app/pages/tabs.dart';
+import 'package:news_app/screens/home_screen.dart';
+import 'package:news_app/screens/tabs.dart';
 import 'package:news_app/providers/theme_provider.dart';
 
 void main() {
@@ -20,7 +20,7 @@ class MyApp extends ConsumerWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
-      home: TabsScreen(),
+      home: const TabsScreen(),
     );
   }
 }
