@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:flutter/src/material/colors.dart';
+
 class NewsModel {
   String? status;
   int? totalResults;
@@ -99,3 +103,14 @@ class Article {
     return data;
   }
 }
+class Discovery {
+  const Discovery({
+   required this.id,
+    required this.title,
+    required this.color,
+  });
+   final String id;
+  final String title;
+  final Color color;
+   
+  }
