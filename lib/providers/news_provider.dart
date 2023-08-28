@@ -50,6 +50,25 @@ class NewsNotifier extends StateNotifier<NewsState> {
     // Update the state with the fetched news data and set loading to false.
     state = state.copyWith(newsModel: news, isLoading: false);
   }
+  loadDiscoveryNews(String category) async {
+  state = state.copyWith(isLoading: true);
+
+  dynamic newsResponse;
+  
+  if (category == 'sports') {
+    newsResponse = await NewsService().fetchSportsNews();
+  } else if (category == 'entertainment') {
+    newsResponse = await NewsService().fetchEntertainment();
+  } else if (category == 'technology') {
+    newsResponse = await NewsService().fetchTechnology();
+  } else if (category == 'politics') {
+    newsResponse = await NewsService().fetchPolitics();
+  }
+  
+  final news = NewsModel.fromJson(newsResponse);
+
+  state = state.copyWith(newsModel: news, isLoading: false);
+}
 }
 
 final newsProvider = StateNotifierProvider<NewsNotifier, NewsState>((ref) => NewsNotifier(),);
