@@ -47,13 +47,17 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
           BottomNavigationBarItem(icon: 
           const Icon(Icons.home), 
           label: 'Home',   
-           backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,),
+           backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,),
           BottomNavigationBarItem(icon: 
           const Icon(Icons.search_sharp), 
           label: 'Discover',
-              backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+              backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
           ),
-          
+            BottomNavigationBarItem(icon: 
+          const Icon(Icons.list), 
+          label: 'News Discovery List',
+              backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
+          ),
         ]),
     );
   }
