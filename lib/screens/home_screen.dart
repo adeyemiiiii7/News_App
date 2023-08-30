@@ -23,16 +23,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       _selectedPageIndex = index;
     });
   }
-   void _setScreen(String identifier) async {
-    Navigator.of(context).pop();
-     if (identifier == 'filters') {
-      final result = await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (ctx) => SearchScreen()
-      ),
-      );
-     }
-   }
+  //  void _setScreen(String identifier) async {
+  //   Navigator.of(context).pop();
+  //    if (identifier == 'filters') {
+  //     final result = await Navigator.of(context).push(
+  //       MaterialPageRoute(
+  //         builder: (ctx) => SearchScreen()
+  //     ),
+  //     );
+  //    }
+   
   String getGreeting() {
     final currentTime = DateTime.now();
     final hour = currentTime.hour;
