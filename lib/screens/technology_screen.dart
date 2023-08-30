@@ -17,7 +17,9 @@ class _TechnologyScreenState extends ConsumerState<TechnologyScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(newsProvider.notifier).loadDiscoveryNews('sports');
+    Future.microtask(() {
+      ref.read(newsProvider.notifier).loadDiscoveryNews('technology');
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class _TechnologyScreenState extends ConsumerState<TechnologyScreen> {
       appBar: AppBar(
         backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white12,
         title: Text(
-          "Sports News",
+          "Technology News",
           style: GoogleFonts.poppins(
             color: appThemeState.isDarkModeEnable ? Colors.white : Colors.grey[900],
           ),
