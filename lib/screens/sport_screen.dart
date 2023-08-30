@@ -15,10 +15,13 @@ class SportScreen extends ConsumerStatefulWidget {
 
 class _SportScreenState extends ConsumerState<SportScreen> {
   @override
-  void initState() {
+    void initState() {
     super.initState();
-    ref.read(newsProvider.notifier).loadDiscoveryNews('sports');
+    Future.microtask(() {
+      ref.read(newsProvider.notifier).loadDiscoveryNews('sports');
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     final appThemeState = ref.watch(appThemeStateNotifier);
