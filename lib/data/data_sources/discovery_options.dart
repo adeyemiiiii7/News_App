@@ -4,7 +4,7 @@ import 'package:news_app/models/news_model.dart';
 
 const availableDiscovery = [
   Discovery(
-    id: 'c1',
+    id: 'sports',
     title: 'Sports',
     color: Colors.red,
   ),
