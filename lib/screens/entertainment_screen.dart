@@ -15,9 +15,11 @@ class EntertainmentScreen extends ConsumerStatefulWidget {
 
 class _EntertainmentScreenState extends ConsumerState<EntertainmentScreen> {
   @override
-  void initState() {
+   void initState() {
     super.initState();
-    ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment');
+    Future.microtask(() {
+      ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment');
+    });
   }
   @override
   Widget build(BuildContext context) {
