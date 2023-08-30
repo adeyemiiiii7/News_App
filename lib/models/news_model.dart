@@ -71,7 +71,7 @@ class Article {
   link = json['link'];
   keywords = json['keywords'] != null ? List<String>.from(json['keywords']) : null;
   creator = json['creator'] != null ? List<String>.from(json['creator']) : null;
-  videoUrl = json['video_url'];
+  videoUrl = json['video_url'] ?? null; // Or provide a default value
   description = json['description'];
   content = json['content'];
   pubDate = json['pubDate'];
