@@ -19,7 +19,7 @@ class NewsModel {
         results!.add(Article.fromJson(v));
       });
     }
-    nextPage = json['nextPage'];
+    //nextPage = json['nextPage'];
   }
 
   Map<String, dynamic> toJson() {
@@ -29,7 +29,7 @@ class NewsModel {
     if (this.results != null) {
       data['results'] = this.results!.map((v) => v.toJson()).toList();
     }
-    data['nextPage'] = this.nextPage;
+  //  data['nextPage'] = this.nextPage;
     return data;
   }
 }
