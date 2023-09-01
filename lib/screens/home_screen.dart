@@ -12,27 +12,18 @@ class HomeScreen extends ConsumerStatefulWidget {
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
-  
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-    int _selectedPageIndex = 0;
+  int _selectedPageIndex = 0;
+
   // Function to get the appropriate greeting based on the time of day
-   void _selectedPage(int index) {
+  void _selectedPage(int index) {
     setState(() {
       _selectedPageIndex = index;
     });
   }
-  //  void _setScreen(String identifier) async {
-  //   Navigator.of(context).pop();
-  //    if (identifier == 'filters') {
-  //     final result = await Navigator.of(context).push(
-  //       MaterialPageRoute(
-  //         builder: (ctx) => SearchScreen()
-  //     ),
-  //     );
-  //    }
-   
+
   String getGreeting() {
     final currentTime = DateTime.now();
     final hour = currentTime.hour;
@@ -44,6 +35,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     } else {
       return 'Good Evening...';
     }
+  }
+
+  Future<void> _refreshNewsData() async {
+    // Call the function to reload your news data here.
+    await ref.read(newsProvider.notifier).loadNews();
+
+    // Notify Riverpod to rebuild the UI by reading the news data again.
+   ref.read(newsProvider); // This will trigger a rebuild.
   }
 
   @override
@@ -65,7 +64,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(appThemeState.isDarkModeEnable ? Icons.lightbulb : Icons.lightbulb_outline),
+            icon: Icon(appThemeState.isDarkModeEnable ? Icons.light_mode_outlined : Icons.dark_mode_outlined),
             onPressed: () {
               if (appThemeState.isDarkModeEnable) {
                 ref.read(appThemeStateNotifier.notifier).setLightTheme();
@@ -77,58 +76,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  getGreeting(),
-                  style: GoogleFonts.poppins(
-                    fontSize: 25,
-                    color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
-                  ),
-                ),
-              ),
-            ),
-            isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: news.results!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return NewsCard(article: news.results![index]);
-                      },
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      getGreeting(),
+                      style: GoogleFonts.poppins(
+                        fontSize: 25,
+                        color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+                      ),
                     ),
                   ),
+                ),
+                isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Expanded(
+                        child: RefreshIndicator(
+                  onRefresh: _refreshNewsData, // Call the refresh function here
+                 child: ListView.builder(
+              itemCount: news.results!.length,
+              itemBuilder: (BuildContext context, int index) {
+              return NewsCard(article: news.results![index]);
+                          },
+                        ),
+                      ),
+                    ),
+              ],
+            
+            ),
+      
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
-      //   onTap: (int index) {
-      //     if (index == 1) {
-      //       Navigator.of(context).push(
-      //         MaterialPageRoute(builder: (context) => SearchScreen()), // Replace with your search screen
-      //       );
-      //     }
-      //   },
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       icon: const Icon(Icons.home),
-      //       label: 'Home',
-      //       backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: const Icon(Icons.search),
-      //       label: 'Search',
-      //       backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
