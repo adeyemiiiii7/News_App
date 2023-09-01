@@ -21,6 +21,10 @@ class _PoliticsScreenState extends ConsumerState<PoliticsScreen> {
       ref.read(newsProvider.notifier).loadDiscoveryNews('politics');
     });
   }
+   Future<void> _refreshNewsData() async {
+    await ref.read(newsProvider.notifier)..loadDiscoveryNews('politics');
+  }
+
   @override
   Widget build(BuildContext context) {
     final appThemeState = ref.watch(appThemeStateNotifier);
@@ -63,14 +67,19 @@ class _PoliticsScreenState extends ConsumerState<PoliticsScreen> {
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: news.results!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return NewsCard(article: news.results![index]);
-                      },
+               : Expanded(
+                  child: RefreshIndicator(
+                      onRefresh: _refreshNewsData, // Call the refresh function here
+                      child: Expanded(
+                        child: ListView.builder(
+                          itemCount: news.results!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return NewsCard(article: news.results![index]);
+                          },
+                        ),
+                      ),
                     ),
-                  ),
+                ),
           ],
         ),
       ),
