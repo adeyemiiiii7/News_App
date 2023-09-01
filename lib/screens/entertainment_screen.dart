@@ -21,6 +21,10 @@ class _EntertainmentScreenState extends ConsumerState<EntertainmentScreen> {
       ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment');
     });
   }
+   Future<void> _refreshNewsData() async {
+    await ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment');
+    ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment');
+  }
   @override
   Widget build(BuildContext context) {
     final appThemeState = ref.watch(appThemeStateNotifier);
@@ -51,26 +55,36 @@ class _EntertainmentScreenState extends ConsumerState<EntertainmentScreen> {
         // ],
       ),
            body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.topLeft,
-                ),
-              ),
-            isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: news.results!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return NewsCard(article: news.results![index]);
-                      },
-                    ),
+            Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.topLeft,
                   ),
+                ),
+              isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Expanded(
+                    child: RefreshIndicator(
+                        onRefresh: _refreshNewsData, // Call the refresh function here
+                        child: Expanded(
+                          child: ListView.builder(
+                            itemCount: news.results!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return NewsCard(article: news.results![index]);
+                            },
+                          ),
+                        ),
+                      ),
+                  ),
+            ],
+          ),
+          
           ],
         ),
       ),
