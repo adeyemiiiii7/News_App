@@ -21,13 +21,19 @@ class _TechnologyScreenState extends ConsumerState<TechnologyScreen> {
       ref.read(newsProvider.notifier).loadDiscoveryNews('technology');
     });
   }
+
+  Future<void> _refreshNewsData() async {
+    await ref.read(newsProvider.notifier)..loadDiscoveryNews('technology');
+  }
+
   @override
   Widget build(BuildContext context) {
     final appThemeState = ref.watch(appThemeStateNotifier);
     final isLoading = ref.watch(newsProvider).isLoading;
     final news = ref.watch(newsProvider).newsModel;
+    
     return Scaffold(
-       backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+      backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
       appBar: AppBar(
         backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white12,
         title: Text(
@@ -37,38 +43,30 @@ class _TechnologyScreenState extends ConsumerState<TechnologyScreen> {
           ),
         ),
         centerTitle: true,
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(appThemeState.isDarkModeEnable ? Icons.lightbulb : Icons.lightbulb_outline),
-        //     onPressed: () {
-        //       if (appThemeState.isDarkModeEnable) {
-        //         ref.read(appThemeStateNotifier.notifier).setLightTheme();
-        //       } else {
-        //         ref.read(appThemeStateNotifier.notifier).setDarkTheme();
-        //       }
-        //     },
-        //   ),
-        // ],
       ),
-           body: SafeArea(
+      body: SafeArea(
         child: Column(
           children: [
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Align(
                 alignment: Alignment.topLeft,
-                ),
+                // Add your greeting text here
               ),
+            ),
             isLoading
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : Expanded(
-                    child: ListView.builder(
-                      itemCount: news.results!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return NewsCard(article: news.results![index]);
-                      },
+                    child: RefreshIndicator(
+                      onRefresh: _refreshNewsData, // Call the refresh function here
+                      child: ListView.builder(
+                        itemCount: news.results!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return NewsCard(article: news.results![index]);
+                        },
+                      ),
                     ),
                   ),
           ],
