@@ -57,29 +57,35 @@ class NewsGridItem extends ConsumerWidget {
         }
         },
         );
+      
+     backgroundColors: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white;
       },
-      splashColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          gradient: LinearGradient(
-            colors: [
-              discovery.color.withOpacity(0.55),
-              discovery.color.withOpacity(0.9),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Text(
-          discovery.title,
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
-              ),
-        ),
+borderRadius: BorderRadius.circular(16),
+child: Container(
+  padding: const EdgeInsets.all(16),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(16),
+  ),
+  child: Container(
+    padding: const EdgeInsets.all(15),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      image: DecorationImage(
+        image: NetworkImage(discovery.flagImagePath),
+        fit: BoxFit.cover, // You can use BoxFit.fill or other BoxFit values as per your needs
       ),
-    );
+    ),
+    child: Center(
+      child: Text(
+        discovery.title,
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+            ),
+      ),
+    ),
+  ),
+),
+        );
+      
   }
 }
