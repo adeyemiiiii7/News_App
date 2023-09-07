@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/src/material/colors.dart';
 
 class NewsModel {
   String? status;
@@ -23,11 +22,11 @@ class NewsModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['totalResults'] = this.totalResults;
-    if (this.results != null) {
-      data['results'] = this.results!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['totalResults'] = totalResults;
+    if (results != null) {
+      data['results'] = results!.map((v) => v.toJson()).toList();
     }
   //  data['nextPage'] = this.nextPage;
     return data;
@@ -39,7 +38,7 @@ class Article {
   String? link;
   List<String>? keywords;
   List<String>? creator;
-  Null? videoUrl;
+  void videoUrl;
   String? description;
   String? content;
   String? pubDate;
@@ -71,7 +70,7 @@ class Article {
   link = json['link'];
   keywords = json['keywords'] != null ? List<String>.from(json['keywords']) : null;
   creator = json['creator'] != null ? List<String>.from(json['creator']) : null;
-  videoUrl = json['video_url'] ?? null; // Or provide a default value
+  //videoUrl = json['video_url']; // Or provide a default value
   description = json['description'];
   content = json['content'];
   pubDate = json['pubDate'];
@@ -85,21 +84,21 @@ class Article {
 
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['title'] = this.title;
-    data['link'] = this.link;
-    data['keywords'] = this.keywords;
-    data['creator'] = this.creator;
-    data['video_url'] = this.videoUrl;
-    data['description'] = this.description;
-    data['content'] = this.content;
-    data['pubDate'] = this.pubDate;
-    data['image_url'] = this.imageUrl;
-    data['source_id'] = this.sourceId;
-    data['source_priority'] = this.sourcePriority;
-    data['country'] = this.country;
-    data['category'] = this.category;
-    data['language'] = this.language;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
+    data['link'] = link;
+    data['keywords'] = keywords;
+    data['creator'] = creator;
+  //  data['video_url'] = videoUrl;
+    data['description'] = description;
+    data['content'] = content;
+    data['pubDate'] = pubDate;
+    data['image_url'] = imageUrl;
+    data['source_id'] = sourceId;
+    data['source_priority'] = sourcePriority;
+    data['country'] = country;
+    data['category'] = category;
+    data['language'] = language;
     return data;
   }
 }
