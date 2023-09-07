@@ -79,7 +79,7 @@ child: Container(
       child: Text(
         discovery.title,
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              color: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+              color: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white,
             ),
       ),
     ),

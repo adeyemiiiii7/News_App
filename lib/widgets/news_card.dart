@@ -18,7 +18,7 @@ class NewsCard extends ConsumerWidget {
           height: 130,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-        color: appThemeState.isDarkModeEnable ? Colors.grey[800] : Colors.white,
+        color: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white,
              // Adjust colors for dark and light themes
           ),
           child: Row(
