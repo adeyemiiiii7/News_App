@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news_app/screens/search_screen.dart';
 import 'package:news_app/providers/news_provider.dart';
 import 'package:news_app/providers/theme_provider.dart';
+import 'package:news_app/screens/main_drawer.dart';
 import 'package:news_app/widgets/news_card.dart';
-import 'package:news_app/widgets/search_file.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -52,29 +51,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final appThemeState = ref.watch(appThemeStateNotifier);
 
     return Scaffold(
-      backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+      backgroundColor: appThemeState.isDarkModeEnable ? const Color.fromARGB(255, 28, 25, 25) : Colors.white,
       appBar: AppBar(
-        backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white12,
+        backgroundColor: appThemeState.isDarkModeEnable ? const Color.fromARGB(255, 28, 25, 25): Colors.white12,
+        
         title: Text(
           "Headlines for Today",
           style: GoogleFonts.poppins(
-            color: appThemeState.isDarkModeEnable ? Colors.white : Colors.grey[900],
+            color: appThemeState.isDarkModeEnable ? Colors.white : const Color.fromARGB(255, 28, 25, 25),
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(appThemeState.isDarkModeEnable ? Icons.light_mode_outlined : Icons.dark_mode_outlined),
-            onPressed: () {
-              if (appThemeState.isDarkModeEnable) {
-                ref.read(appThemeStateNotifier.notifier).setLightTheme();
-              } else {
-                ref.read(appThemeStateNotifier.notifier).setDarkTheme();
-              }
-            },
-          ),
-        ],
+        
+        // actions: const [
+        
+        //   // IconButton(
+        //   //   icon: Icon(appThemeState.isDarkModeEnable ? Icons.light_mode_outlined : Icons.dark_mode_outlined),
+        //   //   onPressed: () {
+        //   //     if (appThemeState.isDarkModeEnable) {
+        //   //       ref.read(appThemeStateNotifier.notifier).setLightTheme();
+        //   //     } else {
+        //   //       ref.read(appThemeStateNotifier.notifier).setDarkTheme();
+        //   //     }
+        //   //   },
+        //   // ),
+        // ],
       ),
+      drawer: const MainDrawer(),
       body: SafeArea(
         child: Stack(
           children: [
