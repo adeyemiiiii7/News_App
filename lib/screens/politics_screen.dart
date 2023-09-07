@@ -22,7 +22,7 @@ class _PoliticsScreenState extends ConsumerState<PoliticsScreen> {
     });
   }
    Future<void> _refreshNewsData() async {
-    await ref.read(newsProvider.notifier)..loadDiscoveryNews('politics');
+    ref.read(newsProvider.notifier).loadDiscoveryNews('politics');
   }
 
   @override
@@ -31,13 +31,13 @@ class _PoliticsScreenState extends ConsumerState<PoliticsScreen> {
     final isLoading = ref.watch(newsProvider).isLoading;
     final news = ref.watch(newsProvider).newsModel;
     return Scaffold(
-       backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+       backgroundColor: appThemeState.isDarkModeEnable ? Color.fromARGB(255, 28, 25, 25) : Colors.white,
       appBar: AppBar(
-        backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white12,
+        backgroundColor: appThemeState.isDarkModeEnable ?  Color.fromARGB(255, 28, 25, 25) : Colors.white12,
         title: Text(
           "Politcs News",
           style: GoogleFonts.poppins(
-            color: appThemeState.isDarkModeEnable ? Colors.white : Colors.grey[900],
+            color: appThemeState.isDarkModeEnable ? Colors.white :  Color.fromARGB(255, 28, 25, 25),
           ),
         ),
         centerTitle: true,
