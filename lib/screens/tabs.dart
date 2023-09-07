@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/screens/home_screen.dart';
 import 'package:news_app/screens/news_discovery.dart';
-import 'package:news_app/screens/search_screen.dart';
 import 'package:news_app/providers/theme_provider.dart';
 
 class TabsScreen extends ConsumerStatefulWidget {
@@ -34,7 +33,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       // ),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
-         backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+         backgroundColor: appThemeState.isDarkModeEnable ?  Color.fromARGB(255, 28, 25, 25) : Colors.white,
          onTap: _selectedPage,
           currentIndex: _selectedPageIndex,
         //  (index) { if (index == 1) {
@@ -53,11 +52,11 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
           label: 'Discover',
               backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
           ),
-            BottomNavigationBarItem(icon: 
-          const Icon(Icons.list), 
-          label: 'News Discovery List',
-              backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
-          ),
+          //   BottomNavigationBarItem(icon: 
+          // const Icon(Icons.person), 
+          // label: 'Account Details',
+          //     backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
+          // ),
         ]),
     );
   }
