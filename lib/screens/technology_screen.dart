@@ -23,7 +23,7 @@ class _TechnologyScreenState extends ConsumerState<TechnologyScreen> {
   }
 
   Future<void> _refreshNewsData() async {
-    await ref.read(newsProvider.notifier)..loadDiscoveryNews('technology');
+    ref.read(newsProvider.notifier).loadDiscoveryNews('technology');
   }
 
   @override
@@ -33,13 +33,13 @@ class _TechnologyScreenState extends ConsumerState<TechnologyScreen> {
     final news = ref.watch(newsProvider).newsModel;
     
     return Scaffold(
-      backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+      backgroundColor: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white,
       appBar: AppBar(
-        backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white12,
+        backgroundColor: appThemeState.isDarkModeEnable ? const Color.fromARGB(255, 28, 25, 25) : Colors.white12,
         title: Text(
           "Technology News",
           style: GoogleFonts.poppins(
-            color: appThemeState.isDarkModeEnable ? Colors.white : Colors.grey[900],
+            color: appThemeState.isDarkModeEnable ? Colors.white :  const Color.fromARGB(255, 28, 25, 25),
           ),
         ),
         centerTitle: true,
