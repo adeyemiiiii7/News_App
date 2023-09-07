@@ -12,6 +12,6 @@ class DiscoveryList extends StatefulWidget {
 class _DiscoveryListState extends State<DiscoveryList> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }
