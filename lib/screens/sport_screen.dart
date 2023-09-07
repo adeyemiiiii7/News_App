@@ -23,7 +23,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
   }
 
   Future<void> _refreshNewsData() async {
-    await ref.read(newsProvider.notifier)..loadDiscoveryNews('sports');
+    ref.read(newsProvider.notifier).loadDiscoveryNews('sports');
   }
 
   @override
@@ -32,13 +32,13 @@ class _SportScreenState extends ConsumerState<SportScreen> {
     final isLoading = ref.watch(newsProvider).isLoading;
     final news = ref.watch(newsProvider).newsModel;
     return Scaffold(
-       backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+       backgroundColor: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25): Colors.white,
       appBar: AppBar(
-        backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white12,
+        backgroundColor: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white12,
         title: Text(
           "Sports News",
           style: GoogleFonts.poppins(
-            color: appThemeState.isDarkModeEnable ? Colors.white : Colors.grey[900],
+            color: appThemeState.isDarkModeEnable ? Colors.white :  const Color.fromARGB(255, 28, 25, 25),
           ),
         ),
         centerTitle: true,
