@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/screens/auth.dart';
-import 'package:news_app/screens/home_screen.dart';
 
 class FirstScreen extends ConsumerStatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
@@ -30,9 +28,6 @@ class _FirstScreenState extends ConsumerState<FirstScreen> {
       backgroundColor: const Color(0xFF1C1919),
       body: Stack(
         children: [
-          // PageView for swiping between screens
-         
-          // Content on top of the PageView
           Positioned.fill(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
