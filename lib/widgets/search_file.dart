@@ -11,7 +11,7 @@ import 'package:news_app/providers/news_provider.dart';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Debouncer _debouncer = Debouncer();
+    Debouncer debouncer = Debouncer();
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       decoration: BoxDecoration(
@@ -25,7 +25,7 @@ import 'package:news_app/providers/news_provider.dart';
       ),
       child: TextField(
         onChanged: (value) {
-          _debouncer.run(() {
+          debouncer.run(() {
             if (value.isNotEmpty) {
               ref.read(newsProvider.notifier).loadSearchNews(value);
             } else {
