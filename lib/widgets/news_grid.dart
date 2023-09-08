@@ -58,34 +58,33 @@ class NewsGridItem extends ConsumerWidget {
         },
         );
       
-     backgroundColors: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white;
+   //  backgroundColors: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white;
       },
 borderRadius: BorderRadius.circular(16),
-child: Container(
-  padding: const EdgeInsets.all(16),
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(16),
-  ),
+// child: Container(
+//   padding: const EdgeInsets.all(16),
+//   decoration: BoxDecoration(
+//    borderRadius: BorderRadius.circular(7),
+//      color: Colors.white54
+//   ),
+  
   child: Container(
     padding: const EdgeInsets.all(15),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      image: DecorationImage(
-        image: NetworkImage(discovery.flagImagePath),
-        fit: BoxFit.cover, // You can use BoxFit.fill or other BoxFit values as per your needs
-      ),
+     borderRadius: BorderRadius.circular(7),
+        color: Colors.white60
     ),
     child: Center(
       child: Text(
         discovery.title,
-        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
               color: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white,
             ),
       ),
     ),
   ),
-),
-        );
+);
+        
       
   }
 }
