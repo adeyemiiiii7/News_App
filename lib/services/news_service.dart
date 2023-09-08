@@ -13,6 +13,12 @@ class NewsService {
     var response = await _dio.get('news?language=en&category=world&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
     return response.data;
   }
+  Future<dynamic> fetchNextPage(int page) async {
+  var response = await _dio.get(
+      'news?language=en&category=world&page=$page&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
+  return response.data;
+}
+
 
   Future<dynamic> fetchNewsBySearch(String title) async {
     var response = await _dio.get('everything?q=$title&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
