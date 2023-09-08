@@ -28,7 +28,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AppThemeState = ref.watch(appThemeStateNotifier);
+   // final AppThemeState = ref.watch(appThemeStateNotifier);
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
