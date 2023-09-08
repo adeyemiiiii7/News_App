@@ -33,7 +33,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       // ),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
-         backgroundColor: appThemeState.isDarkModeEnable ?  Color.fromARGB(255, 28, 25, 25) : Colors.white,
+         backgroundColor: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white54,
          onTap: _selectedPage,
           currentIndex: _selectedPageIndex,
         //  (index) { if (index == 1) {
@@ -44,20 +44,26 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
         // },
         items: [
           BottomNavigationBarItem(icon: 
-          const Icon(Icons.home), 
+           Icon(Icons.home,
+                 color: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.black,), 
           label: 'Home',   
-           backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,),
+       //    backgroundColor: appThemeState.isDarkModeEnable ? Colors.white : Colors.white,
+           ),
           BottomNavigationBarItem(icon: 
-          const Icon(Icons.search_sharp), 
+           Icon(Icons.search_sharp,
+          color:  appThemeState.isDarkModeEnable ? Colors.white54 : Colors.black,), 
           label: 'Discover',
-              backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
+          //    backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
           ),
-          //   BottomNavigationBarItem(icon: 
-          // const Icon(Icons.person), 
-          // label: 'Account Details',
-          //     backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
-          // ),
-        ]),
+        ],
+        selectedLabelStyle: TextStyle(
+    color: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
+
+  ),
+  unselectedLabelStyle: TextStyle(
+    color: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
+  
+  ),),
     );
   }
 }
