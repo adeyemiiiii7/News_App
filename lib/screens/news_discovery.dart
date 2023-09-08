@@ -15,6 +15,7 @@ class NewsDiscoveryScreen extends ConsumerWidget {
       appBar: AppBar(
          backgroundColor: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white12,
         title: const Text('Pick A News Discovery'),
+        centerTitle: true,
       ),
       body: GridView(
         padding: const EdgeInsets.all(24),
