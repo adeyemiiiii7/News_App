@@ -6,6 +6,8 @@ import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/screens/main_drawer.dart';
 import 'package:news_app/widgets/news_card.dart';
 
+import 'next_page.dart';
+
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -16,13 +18,18 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _selectedPageIndex = 0;
 
-  // Function to get the appropriate greeting based on the time of day
-  void _selectedPage(int index) {
-    setState(() {
-      _selectedPageIndex = index;
-    });
-  }
+  late ProviderContainer _container; // Declare a ProviderContainer variable
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+
+  //   // Obtain a reference to the ProviderContainer using dependOnInheritedWidgetOfExactType
+  //   _container = ProviderScope.containerOf(context);
+  // }
+
+  // Function to get the appropriate greeting based on the time of day
   String getGreeting() {
     final currentTime = DateTime.now();
     final hour = currentTime.hour;
@@ -50,74 +57,85 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final isLoading = ref.watch(newsProvider).isLoading;
     final appThemeState = ref.watch(appThemeStateNotifier);
 
-    return Scaffold(
-      backgroundColor: appThemeState.isDarkModeEnable ? const Color.fromARGB(255, 28, 25, 25) : Colors.white,
-      appBar: AppBar(
-        backgroundColor: appThemeState.isDarkModeEnable ? const Color.fromARGB(255, 28, 25, 25): Colors.white12,
-        
-        title: Text(
-          "Headlines for Today",
-          style: GoogleFonts.poppins(
-            color: appThemeState.isDarkModeEnable ? Colors.white : const Color.fromARGB(255, 28, 25, 25),
+   return Scaffold(
+  key: _scaffoldKey,
+    backgroundColor:  appThemeState.isDarkModeEnable
+              ? const Color.fromARGB(255, 28, 25, 25)
+              : Colors.white10,
+  drawer: const MainDrawer(),
+  body: RefreshIndicator(
+    onRefresh: _refreshNewsData, // Call the refresh function here
+    child: CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          expandedHeight: 150.0,
+          backgroundColor: appThemeState.isDarkModeEnable
+              ?  const Color.fromARGB(255, 28, 25, 25)
+              :  Colors.white70,
+          flexibleSpace: FlexibleSpaceBar(
+            title: Text(
+              "Headlines for Today",
+              style: GoogleFonts.poppins(
+                color: appThemeState.isDarkModeEnable
+                    ? Colors.white
+                    : const Color.fromARGB(255, 28, 25, 25),
+              ),
+            ),
+            centerTitle: true,
+          ),
+          leading: IconButton(
+    icon: const Icon(
+      Icons.menu,
+      color: Colors.black, // Set the color to black
+    ),
+    onPressed: () {
+        _scaffoldKey.currentState?.openDrawer();
+    },
+  ),
+),
+      
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              // Your list item builder here
+              return NewsCard(article: news.results![index]);
+            },
+            childCount: news.results!.length,
           ),
         ),
-        centerTitle: true,
-        
-        // actions: const [
-        
-        //   // IconButton(
-        //   //   icon: Icon(appThemeState.isDarkModeEnable ? Icons.light_mode_outlined : Icons.dark_mode_outlined),
-        //   //   onPressed: () {
-        //   //     if (appThemeState.isDarkModeEnable) {
-        //   //       ref.read(appThemeStateNotifier.notifier).setLightTheme();
-        //   //     } else {
-        //   //       ref.read(appThemeStateNotifier.notifier).setDarkTheme();
-        //   //     }
-        //   //   },
-        //   // ),
-        // ],
-      ),
-      drawer: const MainDrawer(),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      getGreeting(),
-                      style: GoogleFonts.poppins(
-                        fontSize: 25,
-                        color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-                isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Expanded(
-                        child: RefreshIndicator(
-                  onRefresh: _refreshNewsData, // Call the refresh function here
-                 child: ListView.builder(
-              itemCount: news.results!.length,
-              itemBuilder: (BuildContext context, int index) {
-              return NewsCard(article: news.results![index]);
-                          },
-                        ),
-                      ),
-                    ),
-              ],
-            
+           SliverToBoxAdapter(
+  child: Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: Align(
+      alignment: Alignment.center,
+      child: TextButton.icon(
+        onPressed: () {
+         Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => const NextPage(),
+    ),
+  );
+        },
+        icon: Icon(
+          Icons.navigate_next_outlined,
+          color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+        ),
+        label: Text(
+          'Next Page',
+          style: TextStyle(
+            color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+                // Add more text style customization as needed
+              ),
             ),
-      
-          ],
+          ),
         ),
       ),
-    );
+            ),
+      ],
+    ),
+  ),
+);
   }
 }
