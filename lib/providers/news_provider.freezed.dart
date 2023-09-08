@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NewsState {
-  bool get isLoading => throw _privateConstructorUsedError;
+  int? get page => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError; //
   NewsModel get newsModel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +30,7 @@ abstract class $NewsStateCopyWith<$Res> {
   factory $NewsStateCopyWith(NewsState value, $Res Function(NewsState) then) =
       _$NewsStateCopyWithImpl<$Res, NewsState>;
   @useResult
-  $Res call({bool isLoading, NewsModel newsModel});
+  $Res call({int? page, bool isLoading, NewsModel newsModel});
 }
 
 /// @nodoc
@@ -45,10 +46,15 @@ class _$NewsStateCopyWithImpl<$Res, $Val extends NewsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? page = freezed,
     Object? isLoading = null,
     Object? newsModel = null,
   }) {
     return _then(_value.copyWith(
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -68,7 +74,7 @@ abstract class _$$_NewsStateCopyWith<$Res> implements $NewsStateCopyWith<$Res> {
       __$$_NewsStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, NewsModel newsModel});
+  $Res call({int? page, bool isLoading, NewsModel newsModel});
 }
 
 /// @nodoc
@@ -82,10 +88,15 @@ class __$$_NewsStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? page = freezed,
     Object? isLoading = null,
     Object? newsModel = null,
   }) {
     return _then(_$_NewsState(
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -101,18 +112,22 @@ class __$$_NewsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NewsState extends _NewsState {
-  const _$_NewsState({this.isLoading = true, required this.newsModel})
+  const _$_NewsState(
+      {this.page, this.isLoading = true, required this.newsModel})
       : super._();
 
   @override
+  final int? page;
+  @override
   @JsonKey()
   final bool isLoading;
+//
   @override
   final NewsModel newsModel;
 
   @override
   String toString() {
-    return 'NewsState(isLoading: $isLoading, newsModel: $newsModel)';
+    return 'NewsState(page: $page, isLoading: $isLoading, newsModel: $newsModel)';
   }
 
   @override
@@ -120,6 +135,7 @@ class _$_NewsState extends _NewsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NewsState &&
+            (identical(other.page, page) || other.page == page) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.newsModel, newsModel) ||
@@ -127,7 +143,7 @@ class _$_NewsState extends _NewsState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, newsModel);
+  int get hashCode => Object.hash(runtimeType, page, isLoading, newsModel);
 
   @JsonKey(ignore: true)
   @override
@@ -138,13 +154,16 @@ class _$_NewsState extends _NewsState {
 
 abstract class _NewsState extends NewsState {
   const factory _NewsState(
-      {final bool isLoading,
+      {final int? page,
+      final bool isLoading,
       required final NewsModel newsModel}) = _$_NewsState;
   const _NewsState._() : super._();
 
   @override
-  bool get isLoading;
+  int? get page;
   @override
+  bool get isLoading;
+  @override //
   NewsModel get newsModel;
   @override
   @JsonKey(ignore: true)
