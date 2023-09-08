@@ -107,11 +107,11 @@ class Discovery {
    required this.id,
     required this.title,
     required this.color,
-    required this.flagImagePath
+    //required this.flagImagePath
   });
    final String id;
   final String title;
   final Color color;
-  final String flagImagePath;
+  //final String flagImagePath;
    
   }
