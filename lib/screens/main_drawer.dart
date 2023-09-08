@@ -20,6 +20,7 @@ class _MainDrawerState extends ConsumerState<MainDrawer> {
   Widget build(BuildContext context) {
      final appThemeState = ref.watch(appThemeStateNotifier);
     return Drawer(
+      shadowColor: Colors.black,
       backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
       child: Column(
         children: [
