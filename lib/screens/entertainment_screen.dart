@@ -18,11 +18,11 @@ class _EntertainmentScreenState extends ConsumerState<EntertainmentScreen> {
    void initState() {
     super.initState();
     Future.microtask(() {
-      ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment');
+      ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment',);
     });
   }
    Future<void> _refreshNewsData() async {
-    await ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment');
+    await ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment',);
     ref.read(newsProvider.notifier).loadDiscoveryNews('entertainment');
   }
   @override

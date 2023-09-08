@@ -31,13 +31,13 @@ class _PoliticsScreenState extends ConsumerState<PoliticsScreen> {
     final isLoading = ref.watch(newsProvider).isLoading;
     final news = ref.watch(newsProvider).newsModel;
     return Scaffold(
-       backgroundColor: appThemeState.isDarkModeEnable ? Color.fromARGB(255, 28, 25, 25) : Colors.white,
+       backgroundColor: appThemeState.isDarkModeEnable ? const Color.fromARGB(255, 28, 25, 25) : Colors.white,
       appBar: AppBar(
-        backgroundColor: appThemeState.isDarkModeEnable ?  Color.fromARGB(255, 28, 25, 25) : Colors.white12,
+        backgroundColor: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white12,
         title: Text(
           "Politcs News",
           style: GoogleFonts.poppins(
-            color: appThemeState.isDarkModeEnable ? Colors.white :  Color.fromARGB(255, 28, 25, 25),
+            color: appThemeState.isDarkModeEnable ? Colors.white :  const Color.fromARGB(255, 28, 25, 25),
           ),
         ),
         centerTitle: true,
