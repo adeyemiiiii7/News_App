@@ -13,6 +13,7 @@ part 'news_provider.freezed.dart';
 class NewsState with _$NewsState {
   // A factory constructor with named parameters is generated based on this class.
   const factory NewsState({
+      int? page,
     @Default(true) bool isLoading, //
     required NewsModel newsModel,
     //@Default(null) dynamic error,
@@ -44,6 +45,17 @@ class NewsNotifier extends StateNotifier<NewsState> {
     // Update the state with the fetched news data and set loading to false.
     state = state.copyWith(newsModel: news, isLoading: false);
   }
+  Future<void> loadNextPage() async {
+  final nextPage = (state.page ?? 1) + 1;
+
+  // Fetch news data for the next page using the NewsService class.
+  final newsResponse = await NewsService().fetchNextPage(nextPage);
+  final news = NewsModel.fromJson(newsResponse);
+
+  // Update the state with the fetched news data and set the current page.
+  state = state.copyWith(newsModel: news, page: nextPage);
+}
+
   loadSearchNews(String title)async{
        state = state.copyWith(isLoading: true);
     
