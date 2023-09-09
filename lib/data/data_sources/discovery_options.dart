@@ -27,5 +27,41 @@ const availableDiscovery = [
     color: Colors.orange, 
    // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
   ),
+  Discovery(
+    id: 'business',
+    title: 'Business',
+    color: Colors.orange, 
+   // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
+  ),
+  Discovery(
+    id: 'health',
+    title: 'Health',
+    color: Colors.orange, 
+   // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
+  ),
+  Discovery(
+    id: 'top news',
+    title: 'Top News',
+    color: Colors.orange, 
+   // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
+  ),
+  Discovery(
+    id: 'tourism',
+    title: 'Tourisms',
+    color: Colors.orange, 
+   // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
+  ),
+  Discovery(
+    id: 'world',
+    title: 'World',
+    color: Colors.orange, 
+   // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
+  ),
+  Discovery(
+    id: 'nigeria headlines',
+    title: 'Nigeria Headlines',
+    color: Colors.orange, 
+   // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
+  ),
   
 ];
