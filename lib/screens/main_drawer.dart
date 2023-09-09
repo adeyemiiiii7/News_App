@@ -14,7 +14,18 @@ class MainDrawer extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _MainDrawerState();
 }
+String getGreeting() {
+    final currentTime = DateTime.now();
+    final hour = currentTime.hour;
 
+    if (hour < 12) {
+      return 'Good Morning...';
+    } else if (hour < 18) {
+      return 'Good Afternoon...';
+    } else {
+      return 'Good Evening...';
+    }
+  }
 class _MainDrawerState extends ConsumerState<MainDrawer> {
   @override
   Widget build(BuildContext context) {
@@ -39,6 +50,9 @@ class _MainDrawerState extends ConsumerState<MainDrawer> {
               ],
             ),
           ),
+          // ListTile(
+          //     Text(getGreeting()),
+          // ),
           ListTile(
             leading: const Icon(
               Icons.home,
@@ -119,7 +133,16 @@ class _MainDrawerState extends ConsumerState<MainDrawer> {
            FirebaseAuth.instance.signOut();
             },
               
-            )
+            ),
+       ListTile(
+      leading: const Icon(Icons.favorite_border,size: 26
+,),
+ title:  Text('My Discoveries',style: GoogleFonts.poppins(
+                fontSize: 24,
+                color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+              ),),
+ onTap: () {},
+      )
         ],
       ),
     );

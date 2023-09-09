@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/providers/news_provider.dart';
 import 'package:news_app/providers/theme_provider.dart';
+//import 'package:news_app/screens/next_page.dart';
 import 'package:news_app/widgets/news_card.dart';
 
 
@@ -31,58 +32,81 @@ class _PoliticsScreenState extends ConsumerState<PoliticsScreen> {
     final isLoading = ref.watch(newsProvider).isLoading;
     final news = ref.watch(newsProvider).newsModel;
     return Scaffold(
-       backgroundColor: appThemeState.isDarkModeEnable ? const Color.fromARGB(255, 28, 25, 25) : Colors.white,
-      appBar: AppBar(
-        backgroundColor: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white12,
-        title: Text(
-          "Politcs News",
-          style: GoogleFonts.poppins(
-            color: appThemeState.isDarkModeEnable ? Colors.white :  const Color.fromARGB(255, 28, 25, 25),
-          ),
-        ),
-        centerTitle: true,
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(appThemeState.isDarkModeEnable ? Icons.lightbulb : Icons.lightbulb_outline),
-        //     onPressed: () {
-        //       if (appThemeState.isDarkModeEnable) {
-        //         ref.read(appThemeStateNotifier.notifier).setLightTheme();
-        //       } else {
-        //         ref.read(appThemeStateNotifier.notifier).setDarkTheme();
-        //       }
-        //     },
-        //   ),
-        // ],
-      ),
-           body: SafeArea(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.topLeft,
+      backgroundColor: appThemeState.isDarkModeEnable
+          ? const Color.fromARGB(255, 28, 25, 25)
+          : Colors.white,
+      body: RefreshIndicator(
+        onRefresh: _refreshNewsData,
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              expandedHeight: 150.0,
+              backgroundColor: appThemeState.isDarkModeEnable
+                  ? const Color.fromARGB(255, 28, 25, 25)
+                  : Colors.white70,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(
+                  "Politics News",
+                  style: GoogleFonts.poppins(
+                    color: appThemeState.isDarkModeEnable
+                        ? Colors.white
+                        : const Color.fromARGB(255, 28, 25, 25),
+                  ),
                 ),
+                centerTitle: true,
               ),
-            isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-               : Expanded(
-                  child: RefreshIndicator(
-                      onRefresh: _refreshNewsData, // Call the refresh function here
-                      child: Expanded(
-                        child: ListView.builder(
-                          itemCount: news.results!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return NewsCard(article: news.results![index]);
-                          },
-                        ),
-                      ),
-                    ),
-                ),
+            ),
+   if (isLoading)
+      const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator(), // Show CircularProgressIndicator when isLoading is true
+        ),
+      )
+    else
+      SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            return NewsCard(article: news.results![index]);
+          },
+          childCount: news.results!.length,
+        ),
+      ),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(16.0),
+            //     child: Align(
+            //       alignment: Alignment.center,
+            //       child: TextButton.icon(
+            //         onPressed: () {
+            //           Navigator.of(context).push(
+            //             MaterialPageRoute(
+            //               builder: (context) => const NextPage(),
+            //             ),
+            //           );
+            //         },
+            //         icon: Icon(
+            //           Icons.navigate_next_outlined,
+            //           color: appThemeState.isDarkModeEnable
+            //               ? Colors.white
+            //               : Colors.black,
+            //         ),
+            //         label: Text(
+            //           'Next Page',
+            //           style: TextStyle(
+            //             color: appThemeState.isDarkModeEnable
+            //                 ? Colors.white
+            //                 : Colors.black,
+            //             fontSize: 14,
+            //             fontWeight: FontWeight.bold,
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
-      ),
+      )
     );
   }
 }

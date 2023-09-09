@@ -6,7 +6,7 @@ import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/screens/main_drawer.dart';
 import 'package:news_app/widgets/news_card.dart';
 
-import 'next_page.dart';
+
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -74,6 +74,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
               :  Colors.white70,
           flexibleSpace: FlexibleSpaceBar(
             title: Text(
+           //   "$getGreeting()
               "Headlines for Today",
               style: GoogleFonts.poppins(
                 color: appThemeState.isDarkModeEnable
@@ -94,45 +95,51 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   ),
 ),
       
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              // Your list item builder here
-              return NewsCard(article: news.results![index]);
-            },
-            childCount: news.results!.length,
-          ),
+      if (isLoading)
+      const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator(), // Show CircularProgressIndicator when isLoading is true
         ),
-           SliverToBoxAdapter(
-  child: Padding(
-    padding: const EdgeInsets.all(16.0),
-    child: Align(
-      alignment: Alignment.center,
-      child: TextButton.icon(
-        onPressed: () {
-         Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => const NextPage(),
-    ),
-  );
-        },
-        icon: Icon(
-          Icons.navigate_next_outlined,
-          color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
-        ),
-        label: Text(
-          'Next Page',
-          style: TextStyle(
-            color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-                // Add more text style customization as needed
-              ),
-            ),
-          ),
+      )
+    else
+      SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            return NewsCard(article: news.results![index]);
+          },
+          childCount: news.results!.length,
         ),
       ),
-            ),
+  //          SliverToBoxAdapter(
+  // child: Padding(
+  //   padding: const EdgeInsets.all(16.0),
+  //   child: Align(
+  //     alignment: Alignment.center,
+  //     child: TextButton.icon(
+  //       onPressed: () {
+  //        Navigator.of(context).push(
+  //   MaterialPageRoute(
+  //     builder: (context) => const NextPage(),
+  //   ),
+  // );
+  //       },
+  //       icon: Icon(
+  //         Icons.navigate_next_outlined,
+  //         color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+  //       ),
+  //       label: Text(
+  //         'Next Page',
+  //         style: TextStyle(
+  //           color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+  //           fontSize: 14,
+  //           fontWeight: FontWeight.bold,
+  //               // Add more text style customization as needed
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //           ),
       ],
     ),
   ),

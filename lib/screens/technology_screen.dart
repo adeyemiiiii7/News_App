@@ -32,46 +32,83 @@ class _TechnologyScreenState extends ConsumerState<TechnologyScreen> {
     final isLoading = ref.watch(newsProvider).isLoading;
     final news = ref.watch(newsProvider).newsModel;
     
-    return Scaffold(
-      backgroundColor: appThemeState.isDarkModeEnable ?  const Color.fromARGB(255, 28, 25, 25) : Colors.white,
-      appBar: AppBar(
-        backgroundColor: appThemeState.isDarkModeEnable ? const Color.fromARGB(255, 28, 25, 25) : Colors.white12,
-        title: Text(
-          "Technology News",
-          style: GoogleFonts.poppins(
-            color: appThemeState.isDarkModeEnable ? Colors.white :  const Color.fromARGB(255, 28, 25, 25),
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.topLeft,
-                // Add your greeting text here
+   return Scaffold(
+      backgroundColor: appThemeState.isDarkModeEnable
+          ? const Color.fromARGB(255, 28, 25, 25)
+          : Colors.white,
+      body: RefreshIndicator(
+        onRefresh: _refreshNewsData,
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              expandedHeight: 150.0,
+              backgroundColor: appThemeState.isDarkModeEnable
+                  ? const Color.fromARGB(255, 28, 25, 25)
+                  : Colors.white70,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(
+                  "Technology News",
+                  style: GoogleFonts.poppins(
+                    color: appThemeState.isDarkModeEnable
+                        ? Colors.white
+                        : const Color.fromARGB(255, 28, 25, 25),
+                  ),
+                ),
+                centerTitle: true,
               ),
             ),
-            isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Expanded(
-                    child: RefreshIndicator(
-                      onRefresh: _refreshNewsData, // Call the refresh function here
-                      child: ListView.builder(
-                        itemCount: news.results!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return NewsCard(article: news.results![index]);
-                        },
-                      ),
-                    ),
-                  ),
+ if (isLoading)
+      const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator(), // Show CircularProgressIndicator when isLoading is true
+        ),
+      )
+    else
+      SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            return NewsCard(article: news.results![index]);
+          },
+          childCount: news.results!.length,
+        ),
+),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(16.0),
+            //     child: Align(
+            //       alignment: Alignment.center,
+            //       child: TextButton.icon(
+            //         onPressed: () {
+            //           Navigator.of(context).push(
+            //             MaterialPageRoute(
+            //               builder: (context) => const NextPage(),
+            //             ),
+            //           );
+            //         },
+            //         icon: Icon(
+            //           Icons.navigate_next_outlined,
+            //           color: appThemeState.isDarkModeEnable
+            //               ? Colors.white
+            //               : Colors.black,
+            //         ),
+            //         label: Text(
+            //           'Next Page',
+            //           style: TextStyle(
+            //             color: appThemeState.isDarkModeEnable
+            //                 ? Colors.white
+            //                 : Colors.black,
+            //             fontSize: 14,
+            //             fontWeight: FontWeight.bold,
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
-    );
+      );
+    
   }
 }
