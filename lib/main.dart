@@ -13,7 +13,7 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //when app freezes after firbase intialization
+  //when app9 freezes after firbase intialization
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
