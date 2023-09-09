@@ -41,7 +41,29 @@ class NewsService {
      var response = await _dio.get('news?language=en&category=politics&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
     return response.data;
   }
-  
-
+  Future<dynamic> fetchHealth() async {
+     var response = await _dio.get('news?language=en&category=health&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
+    return response.data;
+  }
+  Future<dynamic> fetchWorld() async {
+     var response = await _dio.get('news?language=en&category=world&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
+    return response.data;
+  }
+Future<dynamic> fetchBussiness() async {
+     var response = await _dio.get('news?language=en&category=bussiness&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
+    return response.data;
+  }
+Future<dynamic> fetchTopNews() async {
+     var response = await _dio.get('news?language=en&category=top&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
+    return response.data;
+  }
+  Future<dynamic> fetchTourisms() async {
+     var response = await _dio.get('news?language=en&category=tourism&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
+    return response.data;
+  }
+  Future<dynamic> fetchNigeriaHeadlines() async {
+     var response = await _dio.get('news?language=en&country=ng&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
+    return response.data;
+  }
 }
 
