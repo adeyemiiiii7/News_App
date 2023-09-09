@@ -45,7 +45,7 @@ class NewsNotifier extends StateNotifier<NewsState> {
     // Update the state with the fetched news data and set loading to false.
     state = state.copyWith(newsModel: news, isLoading: false);
   }
-  Future<void> loadNextPage() async {
+  Future<void> loadNextPage(nextPage) async {
   final nextPage = (state.page ?? 1) + 1;
 
   // Fetch news data for the next page using the NewsService class.
@@ -79,7 +79,20 @@ class NewsNotifier extends StateNotifier<NewsState> {
     newsResponse = await NewsService().fetchTechnology();
   } else if (id == 'politics') {
     newsResponse = await NewsService().fetchPolitics();
+  } else if(id == 'business'){
+    newsResponse = await NewsService().fetchBussiness();
+  }else if(id == 'health'){
+    newsResponse = await NewsService().fetchHealth();
+  } else if(id == 'top news'){
+    newsResponse = await NewsService().fetchTopNews();
+  } else if(id == 'world'){
+    newsResponse = await NewsService().fetchWorld();
+  } else if(id == 'tourisms'){
+    newsResponse = await NewsService().fetchTourisms();
+  } else if(id == 'nigeria headlines'){
+    newsResponse = await NewsService().fetchNigeriaHeadlines();
   }
+
   
   final news = NewsModel.fromJson(newsResponse);
 
