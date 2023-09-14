@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 
 class NewsModel {
   String? status;
@@ -18,7 +20,11 @@ class NewsModel {
         results!.add(Article.fromJson(v));
       });
     }
-    //nextPage = json['nextPage'];
+     // Check if 'nextPage' key exists before accessing it
+  if (json.containsKey('nextPage')) {
+    nextPage = json['nextPage'];
+  }
+    
   }
 
   Map<String, dynamic> toJson() {
@@ -70,7 +76,10 @@ class Article {
   link = json['link'];
   keywords = json['keywords'] != null ? List<String>.from(json['keywords']) : null;
   creator = json['creator'] != null ? List<String>.from(json['creator']) : null;
-  //videoUrl = json['video_url']; // Or provide a default value
+  // Check if 'video_url' key exists before accessing it
+  if (json.containsKey('video_url')) {
+    videoUrl = json['video_url'];
+  }
   description = json['description'];
   content = json['content'];
   pubDate = json['pubDate'];
@@ -81,6 +90,7 @@ class Article {
   category = json['category'] != null ? List<String>.from(json['category']) : null;
   language = json['language'];
 }
+
 
 
   Map<String, dynamic> toJson() {
@@ -107,11 +117,31 @@ class Discovery {
    required this.id,
     required this.title,
     required this.color,
+     this.isFavorite = false,
     //required this.flagImagePath
   });
    final String id;
   final String title;
   final Color color;
+    final bool isFavorite;
+
+  // Discovery copyWith({
+  //   String? id,
+  //   bool? isFavorite,
+  // }) {
+  //   return Discovery(
+  //     id: id ?? this.id,
+  //     isFavorite: isFavorite ?? this.isFavorite, title: title, color: Colors.black,
+  //   );
+  // }
+}
+
+
+
+
+
+
   //final String flagImagePath;
    
-  }
+  
+
