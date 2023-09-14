@@ -77,9 +77,11 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
            //   "$getGreeting()
               "Headlines for Today",
               style: GoogleFonts.poppins(
+                fontSize: 20,
                 color: appThemeState.isDarkModeEnable
                     ? Colors.white
                     : const Color.fromARGB(255, 28, 25, 25),
+                    
               ),
             ),
             centerTitle: true,
