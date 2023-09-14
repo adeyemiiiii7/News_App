@@ -44,8 +44,8 @@ class _TechnologyScreenState extends ConsumerState<TechnologyScreen> {
               expandedHeight: 150.0,
               backgroundColor: appThemeState.isDarkModeEnable
                   ? const Color.fromARGB(255, 28, 25, 25)
-                  : Colors.white70,
-              flexibleSpace: FlexibleSpaceBar(
+                  : Colors.white,
+                    flexibleSpace: FlexibleSpaceBar(
                 title: Text(
                   "Technology News",
                   style: GoogleFonts.poppins(
@@ -55,7 +55,24 @@ class _TechnologyScreenState extends ConsumerState<TechnologyScreen> {
                   ),
                 ),
                 centerTitle: true,
+                    ),  
+              leading: IconButton(onPressed: (){
+                Navigator.of(context).pop();
+              }, icon: Icon(Icons.arrow_back_ios,color:  appThemeState.isDarkModeEnable
+                  ?Colors.white
+                  : Colors.black
+                  )),
+              actions:[  
+                IconButton(
+                icon:Icon( Icons.favorite_border_outlined,
+              color:  appThemeState.isDarkModeEnable
+                  ?Colors.white
+                  : Colors.black
               ),
+              onPressed: (){
+              },
+              )
+              ],
             ),
  if (isLoading)
       const SliverToBoxAdapter(

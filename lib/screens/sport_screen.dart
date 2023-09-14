@@ -44,7 +44,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
               expandedHeight: 150.0,
               backgroundColor: appThemeState.isDarkModeEnable
                   ? const Color.fromARGB(255, 28, 25, 25)
-                  : Colors.white70,
+                  : Colors.white,
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(
                   "Sports News",
@@ -56,6 +56,24 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                 ),
                 centerTitle: true,
               ),
+             leading: IconButton(onPressed: (){
+                Navigator.of(context).pop();
+              }, icon: Icon(Icons.arrow_back_ios,color:  appThemeState.isDarkModeEnable
+                  ?Colors.white
+                  : Colors.black
+                  )),
+              actions:[  
+                IconButton(
+                icon:Icon( Icons.favorite_border_outlined,
+              color:  appThemeState.isDarkModeEnable
+                  ?Colors.white
+                  : Colors.black
+              ),
+              onPressed: (){
+              },
+              )
+              ],
+              
             ),
    if (isLoading)
       const SliverToBoxAdapter(
