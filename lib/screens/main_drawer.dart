@@ -93,7 +93,7 @@ class _MainDrawerState extends ConsumerState<MainDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const NewsDiscoveryScreen(),
+                  builder: (context) => const TabsScreen(),
                 ),
               );
             },
