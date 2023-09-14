@@ -42,8 +42,8 @@ class _EntertainmentScreenState extends ConsumerState<EntertainmentScreen> {
             SliverAppBar(
               expandedHeight: 150.0,
               backgroundColor: appThemeState.isDarkModeEnable
-                  ? const Color.fromARGB(255, 28, 25, 25)
-                  : Colors.white70,
+                  ? Colors.white
+                  : const Color.fromARGB(255, 159, 144, 144),
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(
                   "Entertainment News",
@@ -55,6 +55,23 @@ class _EntertainmentScreenState extends ConsumerState<EntertainmentScreen> {
                 ),
                 centerTitle: true,
               ),
+                leading: IconButton(onPressed: (){
+                Navigator.of(context).pop();
+              }, icon: Icon(Icons.arrow_back_ios,color:  appThemeState.isDarkModeEnable
+                  ?Colors.white
+                  : Colors.black
+                  )),
+              actions:[  
+                IconButton(
+                icon:Icon( Icons.favorite_border_outlined,
+              color:  appThemeState.isDarkModeEnable
+                  ?Colors.white
+                  : Colors.black
+              ),
+              onPressed: (){
+              },
+              ),
+              ],
             ),
     if (isLoading)
       const SliverToBoxAdapter(
