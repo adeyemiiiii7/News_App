@@ -70,7 +70,7 @@ class NewsNotifier extends StateNotifier<NewsState> {
   state = state.copyWith(isLoading: true);
 
   dynamic newsResponse;
-  
+
   if (id == 'sports') {
     newsResponse = await NewsService().fetchSportsNews();
   } else if (id == 'entertainment') {
@@ -81,23 +81,27 @@ class NewsNotifier extends StateNotifier<NewsState> {
     newsResponse = await NewsService().fetchPolitics();
   } else if(id == 'business'){
     newsResponse = await NewsService().fetchBussiness();
-  }else if(id == 'health'){
+  } else if(id == 'health'){
     newsResponse = await NewsService().fetchHealth();
-  } else if(id == 'top news'){
+  } else if(id == 'top_news'){
     newsResponse = await NewsService().fetchTopNews();
   } else if(id == 'world'){
     newsResponse = await NewsService().fetchWorld();
   } else if(id == 'tourisms'){
     newsResponse = await NewsService().fetchTourisms();
-  } else if(id == 'nigeria headlines'){
+  } else if(id == 'nigeria_headlines'){
     newsResponse = await NewsService().fetchNigeriaHeadlines();
   }
 
-  
-  final news = NewsModel.fromJson(newsResponse);
-
-  state = state.copyWith(newsModel: news, isLoading: false);
+  if (newsResponse != null && newsResponse is Map<String, dynamic>) {
+    final news = NewsModel.fromJson(newsResponse);
+    state = state.copyWith(newsModel: news, isLoading: false);
+  } else {
+    // Handle the case where newsResponse is null or not of the expected type.
+    // You can add error handling logic here.
+  }
 }
-}
 
+
+}
 final newsProvider = StateNotifierProvider<NewsNotifier, NewsState>((ref) => NewsNotifier(),);
