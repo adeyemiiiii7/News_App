@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:news_app/constants/constants.dart';
 
@@ -50,13 +52,13 @@ class NewsService {
     return response.data;
   }
 Future<dynamic> fetchBussiness() async {
-     var response = await _dio.get('news?language=en&category=bussiness&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
+     var response = await _dio.get('news?language=en&category=business&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
     return response.data;
   }
 Future<dynamic> fetchTopNews() async {
      var response = await _dio.get('news?language=en&category=top&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
     return response.data;
-  }
+}
   Future<dynamic> fetchTourisms() async {
      var response = await _dio.get('news?language=en&category=tourism&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
     return response.data;
@@ -65,5 +67,6 @@ Future<dynamic> fetchTopNews() async {
      var response = await _dio.get('news?language=en&country=ng&apiKey=pub_28078ed31faab4e9faa15a14087c40df53ffa');
     return response.data;
   }
-}
 
+
+}

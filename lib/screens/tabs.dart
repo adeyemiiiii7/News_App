@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/screens/home_screen.dart';
+import 'package:news_app/screens/my_discovery.dart';
 import 'package:news_app/screens/news_discovery.dart';
 import 'package:news_app/providers/theme_provider.dart';
 
@@ -26,7 +27,9 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
    if(_selectedPageIndex == 1) {
     activePage = const NewsDiscoveryScreen();
    }
-   
+   if(_selectedPageIndex == 2){
+    activePage = const FavoriteDiscoveryScreen();
+   }
     return Scaffold(
       // appBar: AppBar(
       //   title: Text('changes'),
@@ -45,16 +48,19 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
         items: [
           BottomNavigationBarItem(icon: 
            Icon(Icons.home,
-                 color: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.black,), 
+                 color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,), 
           label: 'Home',   
        //    backgroundColor: appThemeState.isDarkModeEnable ? Colors.white : Colors.white,
            ),
           BottomNavigationBarItem(icon: 
            Icon(Icons.search_sharp,
-          color:  appThemeState.isDarkModeEnable ? Colors.white54 : Colors.black,), 
+          color:  appThemeState.isDarkModeEnable ? Colors.white : Colors.black,), 
           label: 'Discover',
           //    backgroundColor: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.list_alt_outlined,
+            color:  appThemeState.isDarkModeEnable ? Colors.white : Colors.black,), 
+          label: ' My Discovery',)
         ],
         selectedLabelStyle: TextStyle(
     color: appThemeState.isDarkModeEnable ? Colors.white54 : Colors.white,
