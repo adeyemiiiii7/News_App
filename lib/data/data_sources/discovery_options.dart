@@ -40,7 +40,7 @@ const availableDiscovery = [
    // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
   ),
   Discovery(
-    id: 'top news',
+    id: 'top_news',
     title: 'Top News',
     color: Colors.orange, 
    // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
@@ -58,7 +58,7 @@ const availableDiscovery = [
    // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
   ),
   Discovery(
-    id: 'nigeria headlines',
+    id: 'nigeria_headlines',
     title: 'Nigeria Headlines',
     color: Colors.orange, 
    // flagImagePath: 'https://th-i.thgim.com/public/incoming/st1r88/article65374975.ece/alternates/FREE_1200/09EPBS_GLOBAL%20POLITICS.jpg',
