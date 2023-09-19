@@ -3,36 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/providers/theme_provider.dart';
-import 'package:news_app/screens/home_screen.dart';
-import 'package:news_app/screens/news_discovery.dart';
+import 'package:news_app/screens/my_discovery.dart';
 import 'package:news_app/screens/tabs.dart';
 
 class MainDrawer extends ConsumerStatefulWidget {
   const MainDrawer({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _MainDrawerState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _MainDrawerState();
 }
-String getGreeting() {
-    final currentTime = DateTime.now();
-    final hour = currentTime.hour;
 
-    if (hour < 12) {
-      return 'Good Morning...';
-    } else if (hour < 18) {
-      return 'Good Afternoon...';
-    } else {
-      return 'Good Evening...';
-    }
+String getGreeting() {
+  final currentTime = DateTime.now();
+  final hour = currentTime.hour;
+
+  if (hour < 12) {
+    return 'Good Morning...';
+  } else if (hour < 18) {
+    return 'Good Afternoon...';
+  } else {
+    return 'Good Evening...';
   }
+}
+
 class _MainDrawerState extends ConsumerState<MainDrawer> {
   @override
   Widget build(BuildContext context) {
-     final appThemeState = ref.watch(appThemeStateNotifier);
+    final appThemeState = ref.watch(appThemeStateNotifier);
     return Drawer(
       shadowColor: Colors.black,
-      backgroundColor: appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
+      backgroundColor:
+          appThemeState.isDarkModeEnable ? Colors.grey[900] : Colors.white,
       child: Column(
         children: [
           DrawerHeader(
@@ -54,39 +55,44 @@ class _MainDrawerState extends ConsumerState<MainDrawer> {
           //     Text(getGreeting()),
           // ),
           ListTile(
-            leading: const Icon(
+            leading: Icon(
               Icons.home,
               size: 26,
-               color: Color(0xFF1C1919),
+              color:
+                  appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
             ),
             title: Text(
               'Home',
               style: GoogleFonts.poppins(
                 fontSize: 24,
-               color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+                color: appThemeState.isDarkModeEnable
+                    ? Colors.white
+                    : Colors.black,
               ),
             ),
-           onTap: (){
-             Navigator.pushReplacement(
+            onTap: () {
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const TabsScreen(),
                 ),
               );
-            
-           },
+            },
           ),
           ListTile(
-            leading: const Icon(
-            Icons.search_sharp ,
+            leading: Icon(
+              Icons.search_sharp,
               size: 26,
-              color: Color(0xFF1C1919),
+              color:
+                  appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
             ),
             title: Text(
               'Discovery',
               style: GoogleFonts.poppins(
                 fontSize: 24,
-               color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+                color: appThemeState.isDarkModeEnable
+                    ? Colors.white
+                    : Colors.black,
               ),
             ),
             onTap: () {
@@ -100,49 +106,74 @@ class _MainDrawerState extends ConsumerState<MainDrawer> {
           ),
           ListTile(
             leading: Icon(
-               appThemeState.isDarkModeEnable ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
-               size: 26,
-               ),
-               title: Text(
+              appThemeState.isDarkModeEnable
+                  ? Icons.light_mode_outlined
+                  : Icons.dark_mode_outlined,
+              size: 26,
+              color:
+                  appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+            ),
+            title: Text(
               'Change Theme',
               style: GoogleFonts.poppins(
                 fontSize: 24,
-                color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+                color: appThemeState.isDarkModeEnable
+                    ? Colors.white
+                    : Colors.black,
               ),
             ),
-            onTap: (){
-               if (appThemeState.isDarkModeEnable) {
+            onTap: () {
+              if (appThemeState.isDarkModeEnable) {
                 ref.read(appThemeStateNotifier.notifier).setLightTheme();
               } else {
                 ref.read(appThemeStateNotifier.notifier).setDarkTheme();
               }
             },
-            ),
-            ListTile(
-              leading: const Icon(Icons.exit_to_app,
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.exit_to_app,
               size: 26,
-              ),
-              title: Text(
+              color:
+                  appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+            ),
+            title: Text(
               'LogOut',
               style: GoogleFonts.poppins(
                 fontSize: 24,
-                color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
+                color: appThemeState.isDarkModeEnable
+                    ? Colors.white
+                    : Colors.black,
               ),
             ),
             onTap: () {
-           FirebaseAuth.instance.signOut();
+              FirebaseAuth.instance.signOut();
             },
-              
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.favorite_border,
+              size: 26,
+              color:
+                  appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
             ),
-       ListTile(
-      leading: const Icon(Icons.favorite_border,size: 26
-,),
- title:  Text('My Discoveries',style: GoogleFonts.poppins(
+            title: Text(
+              'My Discoveries',
+              style: GoogleFonts.poppins(
                 fontSize: 24,
-                color: appThemeState.isDarkModeEnable ? Colors.white : Colors.black,
-              ),),
- onTap: () {},
-      )
+                color: appThemeState.isDarkModeEnable
+                    ? Colors.white
+                    : Colors.black,
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FavoriteDiscoveryScreen()),
+              );
+            },
+          )
         ],
       ),
     );
